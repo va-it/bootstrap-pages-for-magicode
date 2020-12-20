@@ -1,16 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { AppComponent } from './app.component';
+import { BootstrapPage } from './bootstrap-page';
+import { RandomStringPipe } from './random-string.pipe';
 
 @NgModule({
   declarations: [
-    AppComponent
+    BootstrapPage,
+    RandomStringPipe
   ],
   imports: [
     BrowserModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [BootstrapPage]
 })
 export class AppModule { }
