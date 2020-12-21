@@ -1,7 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import domtoimage from 'dom-to-image';
-import html2canvas from 'html2canvas';
-import * as rasterizeHTML from 'rasterizehtml';
 
 @Component({
   selector: 'bootstrap-page',
@@ -24,9 +22,9 @@ export class BootstrapPage implements OnInit, AfterViewInit {
   @ViewChild('canvas') canvas: ElementRef;
 
   constructor() {
-    // setInterval(() => {
-    //   window.location.reload();
-    // }, 5000);
+    setInterval(() => {
+      window.location.reload();
+    }, 4000);
   }
 
   ngOnInit(): void {
