@@ -24,9 +24,9 @@ export class BootstrapPage implements OnInit, AfterViewInit {
   @ViewChild('canvas') canvas: ElementRef;
 
   constructor() {
-    setInterval(() => {
-      window.location.reload();
-    }, 3000);
+    // setInterval(() => {
+    //   window.location.reload();
+    // }, 5000);
   }
 
   ngOnInit(): void {
@@ -48,7 +48,7 @@ export class BootstrapPage implements OnInit, AfterViewInit {
       '-' +
       this.randomString(8, this.chars);
     // save the DSL code used to produce the page
-    // this.saveData();
+    this.saveData();
     // save a screenshot of the page
     this.savePicture();
   }
@@ -67,17 +67,6 @@ export class BootstrapPage implements OnInit, AfterViewInit {
   }
 
   public savePicture(): void {
-    // html2canvas(this.page.nativeElement).then(canvas => {
-    //   // Convert the canvas to blob
-    //   canvas.toBlob(blob => {
-    //     // To download directly on browser default 'downloads' location
-    //     this.imageLink = this.imageAnchor.nativeElement;
-    //     this.imageLink.download = this.fileName + '.png';
-    //     this.imageLink.href = URL.createObjectURL(blob);
-    //     this.imageLink.click();
-    //   }, 'image/png');
-    // });
-
     // HAS ISSUES WITH STYLED CHECKBOX AND RADIO INPUTS
     domtoimage.toBlob(this.page.nativeElement).then((blob: any) => {
       // To download directly on browser default 'downloads' location
@@ -136,7 +125,7 @@ export class BootstrapPage implements OnInit, AfterViewInit {
   }
 
   public getRandomInputType(): string {
-    const randomChoice = Math.floor(Math.random() * 5) + 1;
+    const randomChoice = Math.floor(Math.random() * 4) + 1;
     switch (randomChoice) {
       case 1:
         return 'text';
@@ -146,8 +135,6 @@ export class BootstrapPage implements OnInit, AfterViewInit {
         return 'checkbox';
       case 4:
         return 'radio';
-      case 5:
-        return 'range';
       default:
         return null;
     }

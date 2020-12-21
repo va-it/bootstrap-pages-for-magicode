@@ -1,12 +1,17 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css");
 
 body {
-  font-family: Roboto, Arial, sans-serif;
   margin: 0;
-}
-.basic-container {
   padding: 30px;
-  width: 1920;
+  width: 1920px;
   height: 1080px;
 }
-
+// REPLACING DEFAULT SVG BACKGROUNDS AS THEY CAUSE ERRORS WITH DOM-TO-IMAGE
+.form-check-input:checked[type=checkbox] {
+  background-image: url("assets/check-solid.png");
+  background-size: .55em;
+}
+.form-check-input:checked[type=radio] {
+  background-image: url("assets/circle-solid.png");
+  background-size: .55em;
+}

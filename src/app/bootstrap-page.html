@@ -38,25 +38,22 @@
 										<ng-container *ngIf="entity.element == 'input-password'">
 										<input type="password" class="form-control my-1" value="{{ this.string | randomString:10:this.chars }}">
 										</ng-container>
-<!--										<ng-container *ngIf="entity.element == 'input-checkbox'">-->
-<!--										<div>-->
-<!--											<input type="checkbox" class="form-check-input my-1 me-2" id="checkbox-{{i}}" checked>-->
-<!--											<label class="form-check-label" for="checkbox-{{i}}">-->
-<!--												{{ this.string | randomString:10:this.chars }}-->
-<!--											</label>-->
-<!--										</div>-->
-<!--										</ng-container>-->
-<!--										<ng-container *ngIf="entity.element == 'input-radio'">-->
-<!--										<div>-->
-<!--											<input type="radio" class="form-check-input my-1 me-2" id="radio-{{i}}" checked>-->
-<!--											<label class="form-check-label" for="radio-{{i}}">-->
-<!--												{{ this.string | randomString:10:this.chars }}-->
-<!--											</label>-->
-<!--										</div>-->
-<!--										</ng-container>-->
-<!--										<ng-container *ngIf="entity.element == 'input-range'">-->
-<!--										<input type="range" class="form-range my-1" />-->
-<!--										</ng-container>-->
+										<ng-container *ngIf="entity.element == 'input-checkbox'">
+										<div class="form-check">
+											<input type="checkbox" class="form-check-input my-1 me-2" id="checkbox-{{i}}" [attr.checked]="true">
+											<label class="form-check-label" for="checkbox-{{i}}">
+												{{ this.string | randomString:10:this.chars }}
+											</label>
+										</div>
+										</ng-container>
+										<ng-container *ngIf="entity.element == 'input-radio'">
+										<div class="form-check">
+											<input type="radio" class="form-check-input my-1 me-2" id="radio-{{i}}" [attr.checked]="true">
+											<label class="form-check-label" for="radio-{{i}}">
+												{{ this.string | randomString:10:this.chars }}
+											</label>
+										</div>
+										</ng-container>
 									</ng-container>
 								</div>
 							</div>
@@ -66,7 +63,8 @@
 			</ng-container>
 		</div>
 	</div>
-	<div class="row justify-content-center mt-3">
+	<div class="row justify-content-center mt-5">
+    <hr>
 		<div class="col-3 text-center text-muted">© Vincenzo Abete - 2020</div>
 	</div>
 </div>
