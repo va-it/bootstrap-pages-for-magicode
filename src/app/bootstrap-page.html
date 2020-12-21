@@ -38,25 +38,25 @@
 										<ng-container *ngIf="entity.element == 'input-password'">
 										<input type="password" class="form-control my-1" value="{{ this.string | randomString:10:this.chars }}">
 										</ng-container>
-										<ng-container *ngIf="entity.element == 'input-checkbox'">
-										<div>
-											<input type="checkbox" class="form-check-input my-1 me-2" id="checkbox-{{i}}" checked>
-											<label class="form-check-label" for="checkbox-{{i}}">
-												{{ this.string | randomString:10:this.chars }}
-											</label>
-										</div>
-										</ng-container>
-										<ng-container *ngIf="entity.element == 'input-radio'">
-										<div>
-											<input type="radio" class="form-check-input my-1 me-2" id="radio-{{i}}" checked>
-											<label class="form-check-label" for="radio-{{i}}">
-												{{ this.string | randomString:10:this.chars }}
-											</label>
-										</div>
-										</ng-container>
-										<ng-container *ngIf="entity.element == 'input-range'">
-										<input type="range" class="form-range my-1" />
-										</ng-container>
+<!--										<ng-container *ngIf="entity.element == 'input-checkbox'">-->
+<!--										<div>-->
+<!--											<input type="checkbox" class="form-check-input my-1 me-2" id="checkbox-{{i}}" checked>-->
+<!--											<label class="form-check-label" for="checkbox-{{i}}">-->
+<!--												{{ this.string | randomString:10:this.chars }}-->
+<!--											</label>-->
+<!--										</div>-->
+<!--										</ng-container>-->
+<!--										<ng-container *ngIf="entity.element == 'input-radio'">-->
+<!--										<div>-->
+<!--											<input type="radio" class="form-check-input my-1 me-2" id="radio-{{i}}" checked>-->
+<!--											<label class="form-check-label" for="radio-{{i}}">-->
+<!--												{{ this.string | randomString:10:this.chars }}-->
+<!--											</label>-->
+<!--										</div>-->
+<!--										</ng-container>-->
+<!--										<ng-container *ngIf="entity.element == 'input-range'">-->
+<!--										<input type="range" class="form-range my-1" />-->
+<!--										</ng-container>-->
 									</ng-container>
 								</div>
 							</div>
@@ -72,4 +72,3 @@
 </div>
 <a #dataAnchor class="d-none"></a>
 <a #imageAnchor class="d-none"></a>
-<canvas #canvas class="d-none"></canvas>

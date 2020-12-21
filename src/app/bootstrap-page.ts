@@ -24,9 +24,9 @@ export class BootstrapPage implements OnInit, AfterViewInit {
   @ViewChild('canvas') canvas: ElementRef;
 
   constructor() {
-    // setInterval(() => {
-    //   window.location.reload();
-    // }, 5000);
+    setInterval(() => {
+      window.location.reload();
+    }, 3000);
   }
 
   ngOnInit(): void {
@@ -48,7 +48,7 @@ export class BootstrapPage implements OnInit, AfterViewInit {
       '-' +
       this.randomString(8, this.chars);
     // save the DSL code used to produce the page
-    this.saveData();
+    // this.saveData();
     // save a screenshot of the page
     this.savePicture();
   }
@@ -63,6 +63,7 @@ export class BootstrapPage implements OnInit, AfterViewInit {
     // (2) CREATE DOWNLOAD LINK
     this.dataLink.href = URL.createObjectURL(this.blob);
     this.dataLink.click();
+    this.dataLink.remove();
   }
 
   public savePicture(): void {
@@ -76,13 +77,17 @@ export class BootstrapPage implements OnInit, AfterViewInit {
     //     this.imageLink.click();
     //   }, 'image/png');
     // });
-    rasterizeHTML.drawDocument(this.page.nativeElement, this.canvas.nativeElement).then(result => {
-      const blob = new Blob([result.image.src], {type : 'image/svg+xml'});
+
+    // HAS ISSUES WITH STYLED CHECKBOX AND RADIO INPUTS
+    domtoimage.toBlob(this.page.nativeElement).then((blob: any) => {
       // To download directly on browser default 'downloads' location
       this.imageLink = this.imageAnchor.nativeElement;
       this.imageLink.download = this.fileName + '.png';
       this.imageLink.href = URL.createObjectURL(blob);
       this.imageLink.click();
+      this.imageLink.remove();
+    }, error => {
+      console.log(error);
     });
   }
 
