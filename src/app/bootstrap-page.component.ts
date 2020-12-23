@@ -101,7 +101,9 @@ export class BootstrapPageComponent extends CommonFunctions implements OnInit, A
     this.initialiseDataForHtml();
     this.data = '';
 
-    const numberOfButtonsInHeader = CommonFunctions.getRandomNumber(2, 6);
+    const numberOfButtonsInHeader = CommonFunctions.getRandomNumber(
+      CommonData.minNumberOfButtonsInHeader, CommonData.maxNumberOfButtonsInHeader
+    );
 
     let headerString = 'header {\n';
 
@@ -120,7 +122,9 @@ export class BootstrapPageComponent extends CommonFunctions implements OnInit, A
 
     const rowsContainer = '\nrows {';
 
-    const numberOfRows = CommonFunctions.getRandomNumber(1, 3);
+    const numberOfRows = CommonFunctions.getRandomNumber(
+      CommonData.minNumberOfRows, CommonData.maxNumberOfRows
+    );
 
     let rowStrings = '';
 
@@ -128,7 +132,9 @@ export class BootstrapPageComponent extends CommonFunctions implements OnInit, A
       const row: Row = { cards: [] };
       let rowString = '\nrow {';
       let cardsStrings = '';
-      const numberOfCards = CommonFunctions.getRandomNumber(1, 4);
+      const numberOfCards = CommonFunctions.getRandomNumber(
+        CommonData.minNumberOfCardsPerRow, CommonData.maxNumberOfCardsPerRow
+      );
 
       for (let j = 0; j < numberOfCards; ++j) {
         const element1 = 'title';
