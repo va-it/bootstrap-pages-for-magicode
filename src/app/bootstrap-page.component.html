@@ -40,7 +40,7 @@
 										</ng-container>
 										<ng-container *ngIf="entity.element == 'input-checkbox'">
 										<div class="form-check">
-											<input type="checkbox" class="form-check-input my-1 me-2" id="checkbox-{{ i }}" [attr.checked]="true">
+											<input type="checkbox" class="form-check-input my-1 me-2" id="checkbox-{{ i }}" checked>
 											<label class="form-check-label" for="checkbox-{{ i }}">
 												{{ '' | randomText:this.characters:10:0 }}
 											</label>
@@ -48,7 +48,7 @@
 										</ng-container>
 										<ng-container *ngIf="entity.element == 'input-radio'">
 										<div class="form-check">
-											<input type="radio" class="form-check-input my-1 me-2" id="radio-{{ i }}" [attr.checked]="true">
+											<input type="radio" class="form-check-input my-1 me-2" id="radio-{{ i }}" checked>
 											<label class="form-check-label" for="radio-{{ i }}">
 												{{ '' | randomText:this.characters:10:0 }}
 											</label>

@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { CommonFunctionsComponent } from './common-functions/common-functions.component';
+import { CommonFunctions } from './common/common-functions';
+import { CommonData } from './common/common-data';
 import domtoimage from 'dom-to-image';
 
 export interface Data {
@@ -21,7 +22,19 @@ export interface Card {
   styleUrls: ['bootstrap-page.component.css'],
   templateUrl: 'bootstrap-page.component.html'
 })
-export class BootstrapPageComponent extends CommonFunctionsComponent implements OnInit, AfterViewInit {
+export class BootstrapPageComponent extends CommonFunctions implements OnInit, AfterViewInit {
+
+  private numbers = CommonData.numbers;
+  private data = '';
+  private blob = new Blob();
+  private fileName = '';
+  private dataLink: HTMLAnchorElement;
+  private imageLink: HTMLAnchorElement;
+  @ViewChild('page') private page: ElementRef;
+  @ViewChild('dataAnchor') private dataAnchor: ElementRef;
+  @ViewChild('imageAnchor') private imageAnchor: ElementRef;
+  public dataForHtml: Data;
+  public characters = CommonData.characters;
 
   constructor() {
     super();
@@ -29,18 +42,6 @@ export class BootstrapPageComponent extends CommonFunctionsComponent implements 
       window.location.reload();
     }, 4000);
   }
-  public dataForHtml: Data;
-  public characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  private numbers = '0123456789';
-  private data = '';
-  private blob: Blob = new Blob();
-  private fileName = '';
-  private dataLink: HTMLAnchorElement;
-  private imageLink: HTMLAnchorElement;
-  @ViewChild('page') page: ElementRef;
-  @ViewChild('dataAnchor') dataAnchor: ElementRef;
-  @ViewChild('imageAnchor') imageAnchor: ElementRef;
-  @ViewChild('canvas') canvas: ElementRef;
 
   ngOnInit(): void {
     this.generateRandomData();
@@ -57,13 +58,13 @@ export class BootstrapPageComponent extends CommonFunctionsComponent implements 
   private saveAll(): void {
     // generate a random filename (e.g. 254-geiud-8701-utgbxpla.png)
     this.fileName =
-      CommonFunctionsComponent.getRandomString(this.numbers, 3) +
+      CommonFunctions.getRandomString(this.numbers, 3) +
       '-' +
-      CommonFunctionsComponent.getRandomString(this.characters, 5) +
+      CommonFunctions.getRandomString(this.characters, 5) +
       '-' +
-      CommonFunctionsComponent.getRandomString(this.numbers, 4) +
+      CommonFunctions.getRandomString(this.numbers, 4) +
       '-' +
-      CommonFunctionsComponent.getRandomString(this.characters, 8);
+      CommonFunctions.getRandomString(this.characters, 8);
     // save the DSL code used to produce the page
     this.saveData();
     // save a screenshot of the page
@@ -100,14 +101,14 @@ export class BootstrapPageComponent extends CommonFunctionsComponent implements 
     this.initialiseDataForHtml();
     this.data = '';
 
-    const numberOfButtonsInHeader = CommonFunctionsComponent.getRandomNumber(2, 6);
+    const numberOfButtonsInHeader = CommonFunctions.getRandomNumber(2, 6);
 
     let headerString = 'header {\n';
 
     const buttonsInHeader = [];
 
     for (let i = 0; i < numberOfButtonsInHeader; ++i) {
-      buttonsInHeader.push(CommonFunctionsComponent.getRandomButton());
+      buttonsInHeader.push(CommonFunctions.getRandomButton());
 
       headerString += buttonsInHeader[i];
       if (i !== numberOfButtonsInHeader - 1) {
@@ -119,7 +120,7 @@ export class BootstrapPageComponent extends CommonFunctionsComponent implements 
 
     const rowsContainer = '\nrows {';
 
-    const numberOfRows = CommonFunctionsComponent.getRandomNumber(1, 3);
+    const numberOfRows = CommonFunctions.getRandomNumber(1, 3);
 
     let rowStrings = '';
 
@@ -127,12 +128,12 @@ export class BootstrapPageComponent extends CommonFunctionsComponent implements 
       const row: Row = { cards: [] };
       let rowString = '\nrow {';
       let cardsStrings = '';
-      const numberOfCards = CommonFunctionsComponent.getRandomNumber(1, 4);
+      const numberOfCards = CommonFunctions.getRandomNumber(1, 4);
 
       for (let j = 0; j < numberOfCards; ++j) {
         const element1 = 'title';
-        const element2 = CommonFunctionsComponent.getRandomElement();
-        const element3 = CommonFunctionsComponent.getRandomElement();
+        const element2 = CommonFunctions.getRandomElement();
+        const element3 = CommonFunctions.getRandomElement();
 
         let cardString = '\ncard {\n';
         cardString += element1 + ',' + element2 + ',' + element3 + '\n}';

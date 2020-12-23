@@ -1,4 +1,4 @@
-export class CommonFunctionsComponent {
+export class CommonFunctions {
   protected static getRandomString(chars: string, length: number): string {
     let stringToReturn = '';
     for (let i = length; i > 0; --i) {
@@ -32,7 +32,7 @@ export class CommonFunctionsComponent {
   }
 
   protected static getRandomButton(): string {
-    const randomChoice = CommonFunctionsComponent.getRandomNumber(1, 6);
+    const randomChoice = CommonFunctions.getRandomNumber(1, 6);
     switch (randomChoice) {
       case 1:
         return 'btn-primary';
@@ -50,7 +50,7 @@ export class CommonFunctionsComponent {
   }
 
   protected static getRandomInputType(): string {
-    const randomChoice = CommonFunctionsComponent.getRandomNumber(1, 4);
+    const randomChoice = CommonFunctions.getRandomNumber(1, 4);
     switch (randomChoice) {
       case 1:
         return 'text';
@@ -66,14 +66,14 @@ export class CommonFunctionsComponent {
   }
 
   protected static getRandomElement(): string {
-    const randomChoice = CommonFunctionsComponent.getRandomNumber(1, 3);
+    const randomChoice = CommonFunctions.getRandomNumber(1, 3);
     switch (randomChoice) {
       case 1:
         return 'text';
       case 2:
-        return CommonFunctionsComponent.getRandomButton();
+        return CommonFunctions.getRandomButton();
       case 3:
-        return 'input-' + CommonFunctionsComponent.getRandomInputType();
+        return 'input-' + CommonFunctions.getRandomInputType();
       default:
         return null;
     }
