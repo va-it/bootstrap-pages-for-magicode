@@ -7,6 +7,6 @@ import { CommonFunctionsComponent } from '../common-functions/common-functions.c
 export class RandomTextPipe extends CommonFunctionsComponent implements PipeTransform {
 
   transform(value: any, chars: string, length?: number, spaces?: number, upperCase?: boolean): any {
-    return CommonFunctionsComponent.randomText(chars, length, spaces, upperCase);
+    return CommonFunctionsComponent.getRandomText(chars, length, spaces, upperCase);
   }
 }
