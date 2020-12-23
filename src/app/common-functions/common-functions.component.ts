@@ -32,7 +32,7 @@ export class CommonFunctionsComponent {
   }
 
   protected static getRandomButton(): string {
-    const randomChoice = Math.floor(Math.random() * 6) + 1;
+    const randomChoice = CommonFunctionsComponent.getRandomNumber(1, 6);
     switch (randomChoice) {
       case 1:
         return 'btn-primary';
