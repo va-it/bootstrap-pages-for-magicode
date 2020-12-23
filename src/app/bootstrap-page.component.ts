@@ -22,14 +22,14 @@ export interface Card {
   templateUrl: 'bootstrap-page.component.html'
 })
 export class BootstrapPageComponent extends CommonFunctionsComponent implements OnInit, AfterViewInit {
-  public dataForHtml: Data = { header: [], body: { rows: [] } };
-  public data = '';
+  public dataForHtml: Data;
   public chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  public numbers = '0123456789';
-  public blob: Blob = new Blob();
-  public fileName = '';
-  public dataLink: HTMLAnchorElement;
-  public imageLink: HTMLAnchorElement;
+  private numbers = '0123456789';
+  private data = '';
+  private blob: Blob = new Blob();
+  private fileName = '';
+  private dataLink: HTMLAnchorElement;
+  private imageLink: HTMLAnchorElement;
   @ViewChild('page') page: ElementRef;
   @ViewChild('dataAnchor') dataAnchor: ElementRef;
   @ViewChild('imageAnchor') imageAnchor: ElementRef;
@@ -37,9 +37,9 @@ export class BootstrapPageComponent extends CommonFunctionsComponent implements 
 
   constructor() {
     super();
-    // setInterval(() => {
-    //   window.location.reload();
-    // }, 4000);
+    setInterval(() => {
+      window.location.reload();
+    }, 4000);
   }
 
   ngOnInit(): void {
@@ -50,7 +50,11 @@ export class BootstrapPageComponent extends CommonFunctionsComponent implements 
     this.saveAll();
   }
 
-  public saveAll(): void {
+  private initialiseDataForHtml(): void {
+    this.dataForHtml = { header: [], body: { rows: [] } };
+  }
+
+  private saveAll(): void {
     // generate a random filename (e.g. 254-geiud-8701-utgbxpla.png)
     this.fileName =
       CommonFunctionsComponent.randomString(this.numbers, 3) +
@@ -66,7 +70,7 @@ export class BootstrapPageComponent extends CommonFunctionsComponent implements 
     this.savePicture();
   }
 
-  public saveData(): void {
+  private saveData(): void {
     this.dataLink = this.dataAnchor.nativeElement;
     this.dataLink.download = this.fileName + '.gui';
     // Create blob object
@@ -92,7 +96,7 @@ export class BootstrapPageComponent extends CommonFunctionsComponent implements 
     });
   }
 
-  public getRandomButton(): string {
+  private getRandomButton(): string {
     const randomChoice = Math.floor(Math.random() * 6) + 1;
     switch (randomChoice) {
       case 1:
@@ -110,7 +114,7 @@ export class BootstrapPageComponent extends CommonFunctionsComponent implements 
     }
   }
 
-  public getRandomElement(): string {
+  private getRandomElement(): string {
     const randomChoice = CommonFunctionsComponent.randomNumber(1, 3);
     switch (randomChoice) {
       case 1:
@@ -124,7 +128,7 @@ export class BootstrapPageComponent extends CommonFunctionsComponent implements 
     }
   }
 
-  public getRandomInputType(): string {
+  private getRandomInputType(): string {
     const randomChoice = CommonFunctionsComponent.randomNumber(1, 4);
     switch (randomChoice) {
       case 1:
@@ -140,7 +144,8 @@ export class BootstrapPageComponent extends CommonFunctionsComponent implements 
     }
   }
 
-  public generateRandomData(): void {
+  private generateRandomData(): void {
+    this.initialiseDataForHtml();
     this.data = '';
 
     const numberOfButtonsInHeader = CommonFunctionsComponent.randomNumber(2, 6);
