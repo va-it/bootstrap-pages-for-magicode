@@ -1,12 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BootstrapPageComponent } from './bootstrap-page.component';
-import { RandomStringPipe } from './pipes/random-string.pipe';
+import { RandomTextPipe } from './pipes/random-text.pipe';
 
 @NgModule({
   declarations: [
     BootstrapPageComponent,
-    RandomStringPipe
+    RandomTextPipe
   ],
   imports: [
     BrowserModule

@@ -37,9 +37,9 @@ export class BootstrapPageComponent extends CommonFunctionsComponent implements 
 
   constructor() {
     super();
-    setInterval(() => {
-      window.location.reload();
-    }, 4000);
+    // setInterval(() => {
+    //   window.location.reload();
+    // }, 4000);
   }
 
   ngOnInit(): void {
@@ -53,13 +53,13 @@ export class BootstrapPageComponent extends CommonFunctionsComponent implements 
   public saveAll(): void {
     // generate a random filename (e.g. 254-geiud-8701-utgbxpla.png)
     this.fileName =
-      CommonFunctionsComponent.randomString(3, this.numbers) +
+      CommonFunctionsComponent.randomString(this.numbers, 3) +
       '-' +
-      CommonFunctionsComponent.randomString(5, this.chars) +
+      CommonFunctionsComponent.randomString(this.chars, 5) +
       '-' +
-      CommonFunctionsComponent.randomString(4, this.numbers) +
+      CommonFunctionsComponent.randomString(this.numbers, 4) +
       '-' +
-      CommonFunctionsComponent.randomString(8, this.chars);
+      CommonFunctionsComponent.randomString(this.chars, 8);
     // save the DSL code used to produce the page
     this.saveData();
     // save a screenshot of the page
@@ -69,11 +69,11 @@ export class BootstrapPageComponent extends CommonFunctionsComponent implements 
   public saveData(): void {
     this.dataLink = this.dataAnchor.nativeElement;
     this.dataLink.download = this.fileName + '.gui';
-    // (1) CREATE BLOB OBJECT
+    // Create blob object
     this.blob = new Blob([this.data], {
       type: 'text/plain'
     });
-    // (2) CREATE DOWNLOAD LINK
+    // Create link to download directly on browser default 'downloads' location
     this.dataLink.href = URL.createObjectURL(this.blob);
     this.dataLink.click();
     this.dataLink.remove();
@@ -82,7 +82,6 @@ export class BootstrapPageComponent extends CommonFunctionsComponent implements 
   public savePicture(): void {
     // HAS ISSUES WITH STYLED CHECKBOX AND RADIO INPUTS
     domtoimage.toBlob(this.page.nativeElement).then((blob: any) => {
-      // To download directly on browser default 'downloads' location
       this.imageLink = this.imageAnchor.nativeElement;
       this.imageLink.download = this.fileName + '.png';
       this.imageLink.href = URL.createObjectURL(blob);
@@ -112,7 +111,7 @@ export class BootstrapPageComponent extends CommonFunctionsComponent implements 
   }
 
   public getRandomElement(): string {
-    const randomChoice = Math.floor(Math.random() * 3) + 1;
+    const randomChoice = CommonFunctionsComponent.randomNumber(1, 3);
     switch (randomChoice) {
       case 1:
         return 'text';
@@ -126,7 +125,7 @@ export class BootstrapPageComponent extends CommonFunctionsComponent implements 
   }
 
   public getRandomInputType(): string {
-    const randomChoice = Math.floor(Math.random() * 4) + 1;
+    const randomChoice = CommonFunctionsComponent.randomNumber(1, 4);
     switch (randomChoice) {
       case 1:
         return 'text';
@@ -191,7 +190,6 @@ export class BootstrapPageComponent extends CommonFunctionsComponent implements 
         row.cards.push(card);
         cardsStrings += cardString;
       }
-
       rowString += cardsStrings + '\n}';
       rowStrings += rowString;
       this.dataForHtml.body.rows.push(row);
