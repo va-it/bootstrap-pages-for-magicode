@@ -1,27 +1,42 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { CommonFunctionsComponent } from './common-functions/common-functions.component';
 import domtoimage from 'dom-to-image';
 
+export interface Data {
+  header: object[];
+  body: Rows;
+}
+export interface Rows {
+  rows: Row[];
+}
+export interface Row {
+  cards: Card[];
+}
+export interface Card {
+  card: object[];
+}
+
 @Component({
-  selector: 'bootstrap-page',
-  styleUrls: ['bootstrap-page.css'],
-  templateUrl: 'bootstrap-page.html'
+  selector: 'app-bootstrap-page',
+  styleUrls: ['bootstrap-page.component.css'],
+  templateUrl: 'bootstrap-page.component.html'
 })
-export class BootstrapPage implements OnInit, AfterViewInit {
-  public dataForHtml: any = {};
-  public data: string = '';
-  public chars: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  public numbers: string = '0123456789';
-  public blob: Blob = new Blob;
-  public fileName: string = '';
+export class BootstrapPageComponent extends CommonFunctionsComponent implements OnInit, AfterViewInit {
+  public dataForHtml: Data = { header: [], body: { rows: [] } };
+  public data = '';
+  public chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  public numbers = '0123456789';
+  public blob: Blob = new Blob();
+  public fileName = '';
   public dataLink: HTMLAnchorElement;
   public imageLink: HTMLAnchorElement;
-  public string: string = '';
   @ViewChild('page') page: ElementRef;
   @ViewChild('dataAnchor') dataAnchor: ElementRef;
   @ViewChild('imageAnchor') imageAnchor: ElementRef;
   @ViewChild('canvas') canvas: ElementRef;
 
   constructor() {
+    super();
     setInterval(() => {
       window.location.reload();
     }, 4000);
@@ -38,13 +53,13 @@ export class BootstrapPage implements OnInit, AfterViewInit {
   public saveAll(): void {
     // generate a random filename (e.g. 254-geiud-8701-utgbxpla.png)
     this.fileName =
-      this.randomString(3, this.numbers) +
+      CommonFunctionsComponent.randomString(3, this.numbers) +
       '-' +
-      this.randomString(5, this.chars) +
+      CommonFunctionsComponent.randomString(5, this.chars) +
       '-' +
-      this.randomString(4, this.numbers) +
+      CommonFunctionsComponent.randomString(4, this.numbers) +
       '-' +
-      this.randomString(8, this.chars);
+      CommonFunctionsComponent.randomString(8, this.chars);
     // save the DSL code used to produce the page
     this.saveData();
     // save a screenshot of the page
@@ -76,18 +91,6 @@ export class BootstrapPage implements OnInit, AfterViewInit {
     }, error => {
       console.log(error);
     });
-  }
-
-  public randomString(length: number, chars: string): string {
-    let result = '';
-    for (let i = length; i > 0; --i) {
-      result += chars[Math.floor(Math.random() * chars.length)];
-    }
-    return result.toLowerCase();
-  }
-
-  public randomNumber(min: number, max: number): number {
-    return Math.floor(Math.random() * max) + min;
   }
 
   public getRandomButton(): string {
@@ -139,11 +142,9 @@ export class BootstrapPage implements OnInit, AfterViewInit {
   }
 
   public generateRandomData(): void {
-    this.dataForHtml = { header: [], body: { rows: [] } };
-
     this.data = '';
 
-    const numberOfButtonsInHeader = this.randomNumber(2, 6);
+    const numberOfButtonsInHeader = CommonFunctionsComponent.randomNumber(2, 6);
 
     let headerString = 'header {\n';
 
@@ -162,16 +163,15 @@ export class BootstrapPage implements OnInit, AfterViewInit {
 
     const rowsContainer = '\nrows {';
 
-    const numberOfRows = this.randomNumber(1, 3);
+    const numberOfRows = CommonFunctionsComponent.randomNumber(1, 3);
 
     let rowStrings = '';
 
     for (let i = 0; i < numberOfRows; ++i) {
+      const row: Row = { cards: [] };
       let rowString = '\nrow {';
       let cardsStrings = '';
-      let myRow = {};
-      const myCards = [];
-      const numberOfCards = this.randomNumber(1, 4);
+      const numberOfCards = CommonFunctionsComponent.randomNumber(1, 4);
 
       for (let j = 0; j < numberOfCards; ++j) {
         const element1 = 'title';
@@ -188,14 +188,13 @@ export class BootstrapPage implements OnInit, AfterViewInit {
             { element: element3 }
           ]
         };
-        myCards.push(card);
+        row.cards.push(card);
         cardsStrings += cardString;
       }
-      myRow = { cards: myCards };
 
       rowString += cardsStrings + '\n}';
       rowStrings += rowString;
-      this.dataForHtml.body.rows.push(myRow);
+      this.dataForHtml.body.rows.push(row);
     }
     this.data += headerString + rowsContainer + rowStrings + '\n}';
   }
