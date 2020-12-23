@@ -8,7 +8,11 @@ export class CommonFunctions {
   }
 
   protected static getRandomNumber(min: number, max: number): number {
-    return Math.floor(Math.random() * max) + min;
+    if (min === 0) {
+      return Math.floor(Math.random() * max);
+    } else {
+      return Math.floor(Math.random() * (max - min + 1) + min);
+    }
   }
 
   protected static getRandomText(chars: string, length: number = 10, spaces: number = 1, upperCase: boolean = true): string {
@@ -32,7 +36,7 @@ export class CommonFunctions {
   }
 
   protected static getRandomButton(): string {
-    const randomChoice = CommonFunctions.getRandomNumber(1, 6);
+    const randomChoice = CommonFunctions.getRandomNumber(1, 5);
     switch (randomChoice) {
       case 1:
         return 'btn-primary';

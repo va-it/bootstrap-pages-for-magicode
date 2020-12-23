@@ -101,63 +101,95 @@ export class BootstrapPageComponent extends CommonFunctions implements OnInit, A
     this.initialiseDataForHtml();
     this.data = '';
 
+    // Get a random number of buttons to display in the header between predefined min and max
     const numberOfButtonsInHeader = CommonFunctions.getRandomNumber(
       CommonData.minNumberOfButtonsInHeader, CommonData.maxNumberOfButtonsInHeader
     );
 
+    // Start the header in the DSL code
     let headerString = 'header {\n';
 
     const buttonsInHeader = [];
 
     for (let i = 0; i < numberOfButtonsInHeader; ++i) {
+      // add a random button to the header
       buttonsInHeader.push(CommonFunctions.getRandomButton());
-
+      // add said button to the DSL code
       headerString += buttonsInHeader[i];
       if (i !== numberOfButtonsInHeader - 1) {
+        // if this is not the last button in the header add a comma to the DSL code
         headerString += ',';
       }
+      // add the object to the variable used to generate the HTML code
       this.dataForHtml.header.push({ element: buttonsInHeader[i] });
     }
+    // close the header element in the DSL code
     headerString += '\n}';
 
+    // start the rows element in the DSL code
     const rowsContainer = '\nrows {';
 
+    // get a random number of rows between predefined min and max
     const numberOfRows = CommonFunctions.getRandomNumber(
       CommonData.minNumberOfRows, CommonData.maxNumberOfRows
     );
-
+    // variable to store all the rows elements in the DSL code
     let rowStrings = '';
 
     for (let i = 0; i < numberOfRows; ++i) {
+      // build the row object used to generate the HTML code
       const row: Row = { cards: [] };
+      // start the row element in the DSL code
       let rowString = '\nrow {';
+      // variable to store all the cards per row in the DSL code
       let cardsStrings = '';
+      // get a random number of cards for the current row, between predefined min and max
       const numberOfCards = CommonFunctions.getRandomNumber(
         CommonData.minNumberOfCardsPerRow, CommonData.maxNumberOfCardsPerRow
       );
 
       for (let j = 0; j < numberOfCards; ++j) {
-        const element1 = 'title';
-        const element2 = CommonFunctions.getRandomElement();
-        const element3 = CommonFunctions.getRandomElement();
-
+        // start the card element in the DSL code
         let cardString = '\ncard {\n';
-        cardString += element1 + ',' + element2 + ',' + element3 + '\n}';
+        // build the card object used to generate the HTML code
+        const card = { card: [] };
+        const elements = [];
+        // get a random number of elements for the current card, between predefined min and max
+        const numberOfElementsPerCard = CommonFunctions.getRandomNumber(
+          CommonData.minNumberOfElementsPerCard, CommonData.maxNumberOfElementsPerCard
+        );
 
-        const card = {
-          card: [
-            { element: element1 },
-            { element: element2 },
-            { element: element3 }
-          ]
-        };
+        for (let k = 0; k < numberOfElementsPerCard; ++k) {
+          if (k === 0) {
+            // first element in a card is always the title
+            elements.push('title');
+          } else {
+            elements.push(CommonFunctions.getRandomElement());
+          }
+          // add the current element to the DSL code for this card
+          cardString += elements[k];
+          if (k + 1 === numberOfElementsPerCard) {
+            // if this is the last element inside the card then close the card element
+            cardString += '\n}';
+          } else {
+            cardString += ',';
+          }
+          // add the current element to the variable for the current card used to generate the HTML code
+          card.card.push({ element : elements[k] });
+        }
+        // add the current card to the cards variable used to generate the HTML code
         row.cards.push(card);
+        // add the current card to the DSL code
         cardsStrings += cardString;
       }
+      // add all the cards of the current row to the DSL code and close the current row element
       rowString += cardsStrings + '\n}';
+      // add the current row to the DSL code
       rowStrings += rowString;
+      // add the current row to the rows variable used to generate the HTML code
       this.dataForHtml.body.rows.push(row);
     }
+    // add each element to the DSL code and close the whole thing
     this.data += headerString + rowsContainer + rowStrings + '\n}';
   }
 }

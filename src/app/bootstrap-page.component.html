@@ -28,9 +28,9 @@
 											</p>
 										</ng-container>
 										<ng-container *ngIf="entity.element.includes('btn')">
-											<button class="btn {{entity.element}} me-2 my-1">
-												{{ '' | randomText:this.characters }}
-											</button>
+                      <button class="btn {{entity.element}} me-2 my-1">
+                        {{ '' | randomText:this.characters }}
+                      </button>
 										</ng-container>
 										<ng-container *ngIf="entity.element == 'input-text'">
 											<input type="text" class="form-control my-1" value="{{ '' | randomText:this.characters:30:0 }}">

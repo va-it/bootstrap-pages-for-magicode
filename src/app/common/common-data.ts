@@ -7,4 +7,6 @@ export class CommonData {
   static readonly maxNumberOfRows = 3;
   static readonly minNumberOfCardsPerRow = 1;
   static readonly maxNumberOfCardsPerRow = 4;
+  static readonly minNumberOfElementsPerCard = 3;
+  static readonly maxNumberOfElementsPerCard = 3;
 }
