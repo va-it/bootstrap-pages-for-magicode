@@ -35,29 +35,26 @@ export class BootstrapPageComponent extends CommonFunctions implements OnInit, A
   @ViewChild('imageAnchor') private imageAnchor: ElementRef;
   public dataForHtml: Data;
   public characters = CommonData.characters;
-  public dataIsSet = false;
-  public minButtonsHeader = 2;
-  public maxButtonsHeader = 6;
-  public minRows = 1;
-  public maxRows = 3;
-  public minCardsPerRow = 1;
-  public maxCardsPerRow = 4;
-  public minElements = 3;
-  public maxElements = 3;
+  public displayPage = false;
+  public settings = new CommonData();
 
   constructor() {
     super();
-    // setInterval(() => {
-    //   window.location.reload();
-    // }, 4000);
   }
 
   ngOnInit(): void {
     this.generateRandomData();
+    if (this.displayPage && this.settings.automaticReload) {
+      setInterval(() => {
+        window.location.reload();
+      }, this.settings.reloadTimer * 1000);
+    }
   }
 
   ngAfterViewInit(): void {
-    //this.saveAll();
+    if (this.displayPage) {
+      this.saveAll();
+    }
   }
 
   private initialiseDataForHtml(): void {
@@ -74,10 +71,14 @@ export class BootstrapPageComponent extends CommonFunctions implements OnInit, A
       CommonFunctions.getRandomString(this.numbers, 4) +
       '-' +
       CommonFunctions.getRandomString(this.characters, 8);
-    // save the DSL code used to produce the page
-    this.saveData();
-    // save a screenshot of the page
-    this.savePicture();
+    if (this.settings.saveData) {
+      // save the DSL code used to produce the page
+      this.saveData();
+    }
+    if (this.settings.savePicture) {
+      // save a screenshot of the page
+      this.savePicture();
+    }
   }
 
   private saveData(): void {
@@ -112,7 +113,7 @@ export class BootstrapPageComponent extends CommonFunctions implements OnInit, A
 
     // Get a random number of buttons to display in the header between predefined min and max
     const numberOfButtonsInHeader = CommonFunctions.getRandomNumber(
-      CommonData.minNumberOfButtonsInHeader, CommonData.maxNumberOfButtonsInHeader
+      this.settings.minNumberOfButtonsInHeader, this.settings.maxNumberOfButtonsInHeader
     );
 
     // Start the header in the DSL code
@@ -140,7 +141,7 @@ export class BootstrapPageComponent extends CommonFunctions implements OnInit, A
 
     // get a random number of rows between predefined min and max
     const numberOfRows = CommonFunctions.getRandomNumber(
-      CommonData.minNumberOfRows, CommonData.maxNumberOfRows
+      this.settings.minNumberOfRows, this.settings.maxNumberOfRows
     );
     // variable to store all the rows elements in the DSL code
     let rowStrings = '';
@@ -154,7 +155,7 @@ export class BootstrapPageComponent extends CommonFunctions implements OnInit, A
       let cardsStrings = '';
       // get a random number of cards for the current row, between predefined min and max
       const numberOfCards = CommonFunctions.getRandomNumber(
-        CommonData.minNumberOfCardsPerRow, CommonData.maxNumberOfCardsPerRow
+        this.settings.minNumberOfCardsPerRow, this.settings.maxNumberOfCardsPerRow
       );
 
       for (let j = 0; j < numberOfCards; ++j) {
@@ -165,7 +166,7 @@ export class BootstrapPageComponent extends CommonFunctions implements OnInit, A
         const elements = [];
         // get a random number of elements for the current card, between predefined min and max
         const numberOfElementsPerCard = CommonFunctions.getRandomNumber(
-          CommonData.minNumberOfElementsPerCard, CommonData.maxNumberOfElementsPerCard
+          this.settings.minNumberOfElementsPerCard, this.settings.maxNumberOfElementsPerCard
         );
 
         for (let k = 0; k < numberOfElementsPerCard; ++k) {
@@ -202,14 +203,9 @@ export class BootstrapPageComponent extends CommonFunctions implements OnInit, A
     this.data += headerString + rowsContainer + rowStrings + '\n}';
   }
 
-  public setMinRows(element): void {
-    this.minRows = element.target.value;
-    if (this.maxRows < element.target.value) {
-      this.maxRows = element.target.value;
-    }
-  }
-
-  public setMaxRows(element): void {
-    this.maxRows = element.target.value;
+  public setDisplayPage(settings: CommonData): void {
+    this.displayPage = true;
+    this.settings = settings;
+    this.generateRandomData();
   }
 }

@@ -3,11 +3,13 @@ import { NgModule } from '@angular/core';
 import { BootstrapPageComponent } from './bootstrap-page.component';
 import { RandomTextPipe } from './pipes/random-text.pipe';
 import {FormsModule} from '@angular/forms';
+import {SettingsFormComponent} from './settings-form/settings-form.component';
 
 @NgModule({
   declarations: [
     BootstrapPageComponent,
-    RandomTextPipe
+    RandomTextPipe,
+    SettingsFormComponent
   ],
   imports: [
     BrowserModule,
