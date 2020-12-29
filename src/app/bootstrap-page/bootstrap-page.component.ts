@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { CommonFunctions } from './common/common-functions';
-import { CommonData } from './common/common-data';
+import { CommonFunctions } from '../common/common-functions';
+import { CommonData } from '../common/common-data';
 import domtoimage from 'dom-to-image';
 
 export interface Data {
@@ -40,6 +40,7 @@ export class BootstrapPageComponent extends CommonFunctions implements OnInit, A
 
   constructor() {
     super();
+    this.settings = JSON.parse(localStorage.getItem('commonData'));
   }
 
   ngOnInit(): void {
