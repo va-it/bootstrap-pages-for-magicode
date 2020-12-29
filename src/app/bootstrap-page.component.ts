@@ -35,12 +35,21 @@ export class BootstrapPageComponent extends CommonFunctions implements OnInit, A
   @ViewChild('imageAnchor') private imageAnchor: ElementRef;
   public dataForHtml: Data;
   public characters = CommonData.characters;
+  public dataIsSet = false;
+  public minButtonsHeader = 2;
+  public maxButtonsHeader = 6;
+  public minRows = 1;
+  public maxRows = 3;
+  public minCardsPerRow = 1;
+  public maxCardsPerRow = 4;
+  public minElements = 3;
+  public maxElements = 3;
 
   constructor() {
     super();
-    setInterval(() => {
-      window.location.reload();
-    }, 4000);
+    // setInterval(() => {
+    //   window.location.reload();
+    // }, 4000);
   }
 
   ngOnInit(): void {
@@ -48,7 +57,7 @@ export class BootstrapPageComponent extends CommonFunctions implements OnInit, A
   }
 
   ngAfterViewInit(): void {
-    this.saveAll();
+    //this.saveAll();
   }
 
   private initialiseDataForHtml(): void {
@@ -191,5 +200,16 @@ export class BootstrapPageComponent extends CommonFunctions implements OnInit, A
     }
     // add each element to the DSL code and close the whole thing
     this.data += headerString + rowsContainer + rowStrings + '\n}';
+  }
+
+  public setMinRows(element): void {
+    this.minRows = element.target.value;
+    if (this.maxRows < element.target.value) {
+      this.maxRows = element.target.value;
+    }
+  }
+
+  public setMaxRows(element): void {
+    this.maxRows = element.target.value;
   }
 }

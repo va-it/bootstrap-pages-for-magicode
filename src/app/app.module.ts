@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BootstrapPageComponent } from './bootstrap-page.component';
 import { RandomTextPipe } from './pipes/random-text.pipe';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -9,7 +10,8 @@ import { RandomTextPipe } from './pipes/random-text.pipe';
     RandomTextPipe
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [BootstrapPageComponent]
