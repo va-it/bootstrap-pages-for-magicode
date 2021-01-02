@@ -39,6 +39,7 @@ export class BootstrapPageComponent extends CommonFunctions implements OnInit, A
 
   constructor() {
     super();
+    this.settings = Object.assign(new CommonData(), JSON.parse(localStorage.getItem('commonData')));
     if (this.settings.automaticReload) {
       setInterval(() => {
         window.location.reload();
@@ -106,7 +107,6 @@ export class BootstrapPageComponent extends CommonFunctions implements OnInit, A
 
   private generateRandomData(): void {
     this.initialiseDataForHtml();
-    this.settings = Object.assign(new CommonData(), JSON.parse(localStorage.getItem('commonData')));
     this.data = '';
 
     // Get a random number of buttons to display in the header between predefined min and max
