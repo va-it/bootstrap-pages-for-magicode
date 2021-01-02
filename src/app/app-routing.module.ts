@@ -7,7 +7,8 @@ import { BootstrapPageComponent } from './bootstrap-page/bootstrap-page.componen
 const routes: Routes = [
   { path: '',   redirectTo: 'settings', pathMatch: 'full' },
   { path: 'settings', component: SettingsFormComponent},
-  { path: 'bootstrap-pages', component: BootstrapPageComponent }
+  { path: 'bootstrap-pages', component: BootstrapPageComponent },
+  { path: '**', redirectTo: 'settings', pathMatch: 'full'}
 ];
 
 @NgModule({
