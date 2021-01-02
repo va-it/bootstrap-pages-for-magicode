@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { CommonFunctions } from './common/common-functions';
-import { CommonData } from './common/common-data';
+import { CommonFunctions } from '../common/common-functions';
+import { CommonData } from '../common/common-data';
 import domtoimage from 'dom-to-image';
 
 export interface Data {
@@ -35,12 +35,16 @@ export class BootstrapPageComponent extends CommonFunctions implements OnInit, A
   @ViewChild('imageAnchor') private imageAnchor: ElementRef;
   public dataForHtml: Data;
   public characters = CommonData.characters;
+  public settings = new CommonData();
 
   constructor() {
     super();
-    setInterval(() => {
-      window.location.reload();
-    }, 4000);
+    this.settings = Object.assign(new CommonData(), JSON.parse(localStorage.getItem('commonData')));
+    if (this.settings.automaticReload) {
+      setInterval(() => {
+        window.location.reload();
+      }, this.settings.reloadTimer * 1000);
+    }
   }
 
   ngOnInit(): void {
@@ -65,10 +69,14 @@ export class BootstrapPageComponent extends CommonFunctions implements OnInit, A
       CommonFunctions.getRandomString(this.numbers, 4) +
       '-' +
       CommonFunctions.getRandomString(this.characters, 8);
-    // save the DSL code used to produce the page
-    this.saveData();
-    // save a screenshot of the page
-    this.savePicture();
+    if (this.settings.saveData) {
+      // save the DSL code used to produce the page
+      this.saveData();
+    }
+    if (this.settings.savePicture) {
+      // save a screenshot of the page
+      this.savePicture();
+    }
   }
 
   private saveData(): void {
@@ -103,7 +111,7 @@ export class BootstrapPageComponent extends CommonFunctions implements OnInit, A
 
     // Get a random number of buttons to display in the header between predefined min and max
     const numberOfButtonsInHeader = CommonFunctions.getRandomNumber(
-      CommonData.minNumberOfButtonsInHeader, CommonData.maxNumberOfButtonsInHeader
+      this.settings.minNumberOfButtonsInHeader, this.settings.maxNumberOfButtonsInHeader
     );
 
     // Start the header in the DSL code
@@ -131,7 +139,7 @@ export class BootstrapPageComponent extends CommonFunctions implements OnInit, A
 
     // get a random number of rows between predefined min and max
     const numberOfRows = CommonFunctions.getRandomNumber(
-      CommonData.minNumberOfRows, CommonData.maxNumberOfRows
+      this.settings.minNumberOfRows, this.settings.maxNumberOfRows
     );
     // variable to store all the rows elements in the DSL code
     let rowStrings = '';
@@ -145,7 +153,7 @@ export class BootstrapPageComponent extends CommonFunctions implements OnInit, A
       let cardsStrings = '';
       // get a random number of cards for the current row, between predefined min and max
       const numberOfCards = CommonFunctions.getRandomNumber(
-        CommonData.minNumberOfCardsPerRow, CommonData.maxNumberOfCardsPerRow
+        this.settings.minNumberOfCardsPerRow, this.settings.maxNumberOfCardsPerRow
       );
 
       for (let j = 0; j < numberOfCards; ++j) {
@@ -156,7 +164,7 @@ export class BootstrapPageComponent extends CommonFunctions implements OnInit, A
         const elements = [];
         // get a random number of elements for the current card, between predefined min and max
         const numberOfElementsPerCard = CommonFunctions.getRandomNumber(
-          CommonData.minNumberOfElementsPerCard, CommonData.maxNumberOfElementsPerCard
+          this.settings.minNumberOfElementsPerCard, this.settings.maxNumberOfElementsPerCard
         );
 
         for (let k = 0; k < numberOfElementsPerCard; ++k) {

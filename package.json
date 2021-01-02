@@ -21,6 +21,8 @@
     "@angular/router": "~11.0.5",
     "@types/dom-to-image": "^2.6.2",
     "dom-to-image": "*",
+    "bootstrap-icons": "*",
+    "angular-webstorage-service": "*",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
