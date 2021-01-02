@@ -20,7 +20,7 @@
               <span class="mx-2">1</span>
               <input type="range" class="form-range" min="1" max="6" id="buttonsHeaderMinRange"
                      step="1" [value]="commonData.minNumberOfButtonsInHeader"
-                     (change)="checkMaxHeader($event)" [(ngModel)]="commonData.minNumberOfButtonsInHeader">
+                     (change)="checkMaxHeader()" [(ngModel)]="commonData.minNumberOfButtonsInHeader">
               <span class="mx-2">6</span>
             </div>
           </div>
@@ -48,7 +48,7 @@
               <span class="mx-2">1</span>
               <input type="range" class="form-range" min="1" max="5" id="rowsMinRange"
                      step="1" [value]="commonData.minNumberOfRows"
-                     (change)="checkMaxRows($event)" [(ngModel)]="commonData.minNumberOfRows">
+                     (change)="checkMaxRows()" [(ngModel)]="commonData.minNumberOfRows">
               <span class="mx-2">5</span>
             </div>
           </div>
@@ -75,7 +75,7 @@
               <span class="mx-2">1</span>
               <input type="range" class="form-range" min="1" max="5" id="cardsMinRange"
                      step="1" [value]="commonData.minNumberOfCardsPerRow"
-                     (change)="checkMaxCards($event)" [(ngModel)]="commonData.minNumberOfCardsPerRow">
+                     (change)="checkMaxCards()" [(ngModel)]="commonData.minNumberOfCardsPerRow">
               <span class="mx-2">5</span>
             </div>
           </div>
@@ -102,7 +102,7 @@
               <span class="mx-2">1</span>
               <input type="range" class="form-range" min="1" max="5" id="elementsMinRange"
                      step="1" [value]="commonData.minNumberOfElementsPerCard"
-                     (change)="checkMaxElements($event)" [(ngModel)]="commonData.minNumberOfElementsPerCard">
+                     (change)="checkMaxElements()" [(ngModel)]="commonData.minNumberOfElementsPerCard">
               <span class="mx-2">5</span>
             </div>
           </div>

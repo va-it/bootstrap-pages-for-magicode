@@ -35,27 +35,23 @@ export class BootstrapPageComponent extends CommonFunctions implements OnInit, A
   @ViewChild('imageAnchor') private imageAnchor: ElementRef;
   public dataForHtml: Data;
   public characters = CommonData.characters;
-  public displayPage = false;
   public settings = new CommonData();
 
   constructor() {
     super();
-    this.settings = JSON.parse(localStorage.getItem('commonData'));
-  }
-
-  ngOnInit(): void {
-    this.generateRandomData();
-    if (this.displayPage && this.settings.automaticReload) {
+    if (this.settings.automaticReload) {
       setInterval(() => {
         window.location.reload();
       }, this.settings.reloadTimer * 1000);
     }
   }
 
+  ngOnInit(): void {
+    this.generateRandomData();
+  }
+
   ngAfterViewInit(): void {
-    if (this.displayPage) {
-      this.saveAll();
-    }
+    this.saveAll();
   }
 
   private initialiseDataForHtml(): void {
@@ -110,6 +106,7 @@ export class BootstrapPageComponent extends CommonFunctions implements OnInit, A
 
   private generateRandomData(): void {
     this.initialiseDataForHtml();
+    this.settings = Object.assign(new CommonData(), JSON.parse(localStorage.getItem('commonData')));
     this.data = '';
 
     // Get a random number of buttons to display in the header between predefined min and max
@@ -202,11 +199,5 @@ export class BootstrapPageComponent extends CommonFunctions implements OnInit, A
     }
     // add each element to the DSL code and close the whole thing
     this.data += headerString + rowsContainer + rowStrings + '\n}';
-  }
-
-  public setDisplayPage(settings: CommonData): void {
-    this.displayPage = true;
-    this.settings = settings;
-    this.generateRandomData();
   }
 }
