@@ -6,7 +6,7 @@ This project was created to provide a quick and easy way to generate images and 
 While his project includes an extensive dataset for training the neural network on screenshots of web-pages, I wanted to expand the number of elements found in these (e.g. text inputs, checkboxes etc.)
 The system, for now, is only capable of including text-inputs, checkboxes and radio boxes on top of the pre-existing elements found in pix2code web datasets. The code, however, is written in a flexible way to easily allow for further elements.
 
-The system allows to customise the number of elements, rows and cards generated...
+The system gives you the option to customise the number of elements, rows and cards generated...
 
 ![First screenshot of Setting pages](screenshot_1.png?raw=true "Customise the number of elements")
 
