@@ -53,6 +53,9 @@ export class CommonFunctions {
     }
   }
 
+  /* 
+    Add an extra case to include an extra type of input (e.g. range, file etc.)
+  */
   protected static getRandomInputType(): string {
     const randomChoice = CommonFunctions.getRandomNumber(1, 4);
     switch (randomChoice) {
@@ -69,6 +72,9 @@ export class CommonFunctions {
     }
   }
 
+  /* 
+    Add an extra case to include an extra type of element inside cards (e.g. <select>, <textarea> etc.)
+  */
   protected static getRandomElement(): string {
     const randomChoice = CommonFunctions.getRandomNumber(1, 3);
     switch (randomChoice) {

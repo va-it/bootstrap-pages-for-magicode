@@ -1,1 +1,6 @@
 @import url('../../../node_modules/bootstrap-icons/font/bootstrap-icons.css');
+
+/* Fix default vertical alignment of icons (text-bottom is too low) */
+[class^="bi-"]::before {
+    vertical-align: bottom;
+}
