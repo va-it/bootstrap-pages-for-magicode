@@ -1,5 +1,5 @@
 
-# Bootstrap pages for pix2code
+# Bootstrap pages for MAGICODE
 
 This project was created to provide a quick and easy way to generate images and corresponding DSL code for the training of MAGICODE, a customised version of Tony Beltramelli's [pix2code](https://github.com/tonybeltramelli/pix2code). 
 
