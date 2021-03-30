@@ -23,15 +23,17 @@
                 <span class="mx-2">1</span>
                 <input type="range" class="form-range" min="1" max="6" id="buttonsHeaderMinRange"
                        step="1" [value]="commonData.minNumberOfButtonsInHeader"
-                       (change)="checkMaxHeader()" [(ngModel)]="commonData.minNumberOfButtonsInHeader">
+                       (change)="ensureMaxIsNotSmallerThanMin('NumberOfButtonsInHeader')"
+                       [(ngModel)]="commonData.minNumberOfButtonsInHeader">
                 <span class="mx-2">6</span>
               </div>
-            </div>            
+            </div>
           </div>
           <div class="mb-3 row">
             <div class="col-auto">
               <label for="buttonsHeaderMaxRange" class="form-label">
-                Maximum number of buttons in header: <span class="badge rounded-pill bg-danger">{{commonData.maxNumberOfButtonsInHeader}}</span>
+                Maximum number of buttons in header:
+                <span class="badge rounded-pill bg-danger">{{commonData.maxNumberOfButtonsInHeader}}</span>
               </label>
             </div>
             <div class="col">
@@ -51,7 +53,8 @@
           <div class="mb-3 row">
             <div class="col-auto">
               <label for="rowsMinRange" class="form-label">
-                Minimum number of rows: <span class="badge rounded-pill bg-danger">{{commonData.minNumberOfRows}}</span>
+                Minimum number of rows:
+                <span class="badge rounded-pill bg-danger">{{commonData.minNumberOfRows}}</span>
               </label>
             </div>
             <div class="col">
@@ -59,7 +62,8 @@
                 <span class="mx-2">1</span>
                 <input type="range" class="form-range" min="1" max="5" id="rowsMinRange"
                        step="1" [value]="commonData.minNumberOfRows"
-                       (change)="checkMaxRows()" [(ngModel)]="commonData.minNumberOfRows">
+                       (change)="ensureMaxIsNotSmallerThanMin('NumberOfRows')"
+                       [(ngModel)]="commonData.minNumberOfRows">
                 <span class="mx-2">5</span>
               </div>
             </div>
@@ -67,7 +71,8 @@
           <div class="mb-3 row">
             <div class="col-auto">
               <label for="rowsMaxRange" class="form-label">
-                Maximum number of rows: <span class="badge rounded-pill bg-danger">{{commonData.maxNumberOfRows}}</span>
+                Maximum number of rows:
+                <span class="badge rounded-pill bg-danger">{{commonData.maxNumberOfRows}}</span>
               </label>
             </div>
             <div class="col">
@@ -86,7 +91,8 @@
           <div class="mb-3 row">
             <div class="col-auto">
               <label for="cardsMinRange" class="form-label">
-                Minimum number of cards per row: <span class="badge rounded-pill bg-danger">{{commonData.minNumberOfCardsPerRow}}</span>
+                Minimum number of cards per row:
+                <span class="badge rounded-pill bg-danger">{{commonData.minNumberOfCardsPerRow}}</span>
               </label>
             </div>
             <div class="col">
@@ -94,7 +100,8 @@
                 <span class="mx-2">1</span>
                 <input type="range" class="form-range" min="1" max="5" id="cardsMinRange"
                        step="1" [value]="commonData.minNumberOfCardsPerRow"
-                       (change)="checkMaxCards()" [(ngModel)]="commonData.minNumberOfCardsPerRow">
+                       (change)="ensureMaxIsNotSmallerThanMin('NumberOfCardsPerRow')"
+                       [(ngModel)]="commonData.minNumberOfCardsPerRow">
                 <span class="mx-2">5</span>
               </div>
             </div>
@@ -102,7 +109,8 @@
           <div class="mb-3 row">
             <div class="col-auto">
               <label for="cardsMaxRange" class="form-label">
-                Maximum number of cards per row: <span class="badge rounded-pill bg-danger">{{commonData.maxNumberOfCardsPerRow}}</span>
+                Maximum number of cards per row:
+                <span class="badge rounded-pill bg-danger">{{commonData.maxNumberOfCardsPerRow}}</span>
               </label>
             </div>
             <div class="col">
@@ -121,7 +129,8 @@
           <div class="mb-3 row">
             <div class="col-auto">
               <label for="elementsMinRange" class="form-label">
-                Minimum number of elements per card: <span class="badge rounded-pill bg-danger">{{commonData.minNumberOfElementsPerCard}}</span>
+                Minimum number of elements per card:
+                <span class="badge rounded-pill bg-danger">{{commonData.minNumberOfElementsPerCard}}</span>
               </label>
             </div>
             <div class="col">
@@ -129,7 +138,8 @@
                 <span class="mx-2">1</span>
                 <input type="range" class="form-range" min="1" max="5" id="elementsMinRange"
                        step="1" [value]="commonData.minNumberOfElementsPerCard"
-                       (change)="checkMaxElements()" [(ngModel)]="commonData.minNumberOfElementsPerCard">
+                       (change)="ensureMaxIsNotSmallerThanMin('NumberOfElementsPerCard')"
+                       [(ngModel)]="commonData.minNumberOfElementsPerCard">
                 <span class="mx-2">5</span>
               </div>
             </div>
@@ -137,7 +147,8 @@
           <div class="mb-3 row">
             <div class="col-auto">
               <label for="elementsMaxRange" class="form-label">
-                Maximum number of elements per card: <span class="badge rounded-pill bg-danger">{{commonData.maxNumberOfElementsPerCard}}</span>
+                Maximum number of elements per card:
+                <span class="badge rounded-pill bg-danger">{{commonData.maxNumberOfElementsPerCard}}</span>
               </label>
             </div>
             <div class="col">
@@ -156,7 +167,8 @@
           <div class="mb-3 row">
             <div class="col-auto">
               <label for="automaticReload" class="form-label">
-                Reload the page automatically: <span class="badge rounded-pill bg-danger">{{commonData.automaticReload ? 'Yes' : 'No'}}</span>
+                Reload the page automatically:
+                <span class="badge rounded-pill bg-danger">{{commonData.automaticReload ? 'Yes' : 'No'}}</span>
               </label>
             </div>
             <div class="col">
@@ -167,8 +179,8 @@
           <div class="mb-3 row">
             <div class="col-auto">
               <label for="reloadTimer" class="form-label">
-                Reload the page after: 
-                <span class="badge rounded-pill" 
+                Reload the page after:
+                <span class="badge rounded-pill"
                 [ngClass]="{'bg-danger' : commonData.automaticReload, 'bg-secondary' : !commonData.automaticReload}">
                   {{commonData.reloadTimer}} seconds
                 </span>
@@ -190,7 +202,8 @@
           <div class="mb-3 row">
             <div class="col-auto">
               <label for="savePicture" class="form-label">
-                Save a screenshot <span class="fst-italic">(.png)</span> of the page: <span class="badge rounded-pill bg-danger">{{commonData.savePicture ? 'Yes' : 'No'}}</span>
+                Save a screenshot <span class="fst-italic">(.png)</span> of the page:
+                <span class="badge rounded-pill bg-danger">{{commonData.savePicture ? 'Yes' : 'No'}}</span>
               </label>
             </div>
             <div class="col">
@@ -201,7 +214,8 @@
           <div class="mb-3 row">
             <div class="col-auto">
               <label for="saveData" class="form-label">
-                Save DSL code <span class="fst-italic">(.gui)</span> used to generate the page: <span class="badge rounded-pill bg-danger">{{commonData.saveData ? 'Yes' : 'No'}}</span>
+                Save DSL code <span class="fst-italic">(.gui)</span> used to generate the page:
+                <span class="badge rounded-pill bg-danger">{{commonData.saveData ? 'Yes' : 'No'}}</span>
               </label>
             </div>
             <div class="col">

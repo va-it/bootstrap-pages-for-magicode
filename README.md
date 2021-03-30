@@ -1,7 +1,7 @@
 
-# Bootstrap pages for pix2code
+# Bootstrap pages for MAGICODE
 
-This project was created to provide a quick and easy way to generate images and corresponding DSL code for the training of Tony Beltramelli's [pix2code](https://github.com/tonybeltramelli/pix2code). 
+This project was created to provide a quick and easy way to generate images and corresponding DSL code for the training of MAGICODE, a customised version of Tony Beltramelli's [pix2code](https://github.com/tonybeltramelli/pix2code). 
 
 While his project includes an extensive dataset for training the neural network on screenshots of web-pages, I wanted to expand the number of elements found in these (e.g. text inputs, checkboxes etc.)
 The system, for now, is only capable of including text-inputs, checkboxes and radio boxes on top of the pre-existing elements found in pix2code web datasets. The code, however, is written in a flexible way to easily allow for further elements.
